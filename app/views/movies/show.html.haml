@@ -3,6 +3,8 @@
     .row
       .col-md-4
         = image_tag @movie.image.url(:medium)
+        .star-rating{ "data-score" => @avg_review }
+        %em #{@movie.reviews.length} reviews
         .table-responsive
           %table.table
             %tbody
@@ -32,5 +34,16 @@
                 %td
                   = @movie.rating
 
+          = link_to "Write a Review", new_movie_review_path(@movie)
+
+      .col-md-7.col-md-offset-1
+        %h1.review_title= @movie.title
+        %p= @movie.description
+
+        - if @movie.reviews.blank?
+          %h3 No reviews just yet, would you like to add the first!
+          = link_to "Write Review", new_movie_review_path(@movie), class: 'btn btn-danger'
+        - else
+          = render @movie.reviews.recent
 = link_to 'Edit', edit_movie_path(@movie) |
 = link_to 'Back', movies_path

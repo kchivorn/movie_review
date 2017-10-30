@@ -7,6 +7,7 @@ class MoviesController < ApplicationController
   end
 
   def show
+    @avg_review = @movie.reviews.average(:rating).try(:round, 2)
   end
 
   def new

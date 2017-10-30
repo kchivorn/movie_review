@@ -1,13 +1,7 @@
 class ReviewsController < ApplicationController
   before_action :set_review, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!, except: [:index, :show]
-
-  def index
-    @reviews = Review.all
-  end
-
-  def show
-  end
+  before_action :set_movie
+  before_action :authenticate_user!
 
   def new
     @review = current_user.reviews.new
@@ -18,14 +12,12 @@ class ReviewsController < ApplicationController
 
   def create
     @review = current_user.reviews.new(review_params)
-
+    @review.movie_id = @movie.id
     respond_to do |format|
       if @review.save
-        format.html { redirect_to @review, notice: 'Review was successfully created.' }
-        format.json { render :show, status: :created, location: @review }
+        format.html { redirect_to @movie, notice: 'Review was successfully created.' }
       else
         format.html { render :new }
-        format.json { render json: @review.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -53,6 +45,10 @@ class ReviewsController < ApplicationController
   private
     def set_review
       @review = current_user.reviews.find(params[:id])
+    end
+
+    def set_movie
+      @movie = Movie.find(params[:movie_id])
     end
 
     def review_params
