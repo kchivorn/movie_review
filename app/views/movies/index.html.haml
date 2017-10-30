@@ -1,0 +1,8 @@
+- if !user_signed_in?
+  .jumbotron
+    %h1 Your Favorite Movies Reviewed
+    %p Hashtag hoodie mumblecore selfies. Blah
+    %p
+      = link_to "Sign Up To Write A Review", new_user_registration_path, class: "btn btn-primary btn-lg"
+.row
+  = render @movies
