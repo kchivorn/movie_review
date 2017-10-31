@@ -2,24 +2,25 @@ class MoviesController < ApplicationController
   before_action :set_movie, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, except: [:show, :index]
 
-  def search
+  def autocomplete
+    render json: Movie.search(params[:query], {
+      fields: ["title^5", "director"],
+      match: :word_start,
+      limit: 10,
+      load: false,
+    }).map(&:title)
+  end
+
+  def index
     if params[:search].present?
-      @movies = Movie.search(params[:search])
+      @movies = Movie.search params[:search]
     else
       @movies = Movie.all
     end
   end
 
-  def index
-    @movies = Movie.all
-  end
-
   def show
     @avg_review = @movie.reviews.average(:rating).try(:round, 2)
-  end
-
-  def search
-
   end
 
   def new

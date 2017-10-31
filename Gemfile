@@ -20,8 +20,9 @@ gem 'haml', '~> 5.0', '>= 5.0.4'
 gem 'paperclip', '~> 5.1'
 gem 'searchkick', '~> 2.3', '>= 2.3.2'
 
+
 group :development, :test do
-  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'pry-byebug'
   gem 'capybara', '~> 2.13'
   gem 'selenium-webdriver'
 end

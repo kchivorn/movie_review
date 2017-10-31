@@ -21,4 +21,4 @@
 /yarn-error.log
 
 .byebug_history
-/public/system/movies/images
+public/system/movies/images/
