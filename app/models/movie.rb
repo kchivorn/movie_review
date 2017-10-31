@@ -1,4 +1,5 @@
 class Movie < ApplicationRecord
+  searchkick
   belongs_to :user
   has_many :reviews
   has_attached_file :image, styles: { medium: "400x600#", thumb: "100x100#" }, default_url: "/images/:style/missing.png"
