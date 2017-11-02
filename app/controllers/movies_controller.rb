@@ -5,13 +5,14 @@ class MoviesController < ApplicationController
   def autocomplete
     render json: Movie.search(params[:query], {
       fields: ["title^5", "director"],
-      match: :word_start,
+      match: :word_middle,
       limit: 10,
-      load: false,
+      load: false
     }).map(&:title)
   end
 
   def index
+
     if params[:search].present?
       @movies = Movie.search params[:search]
     else

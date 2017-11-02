@@ -2035,7 +2035,7 @@
             _onEnterKeyed: function onEnterKeyed(type, $e) {
                 var $selectable;
                 if ($selectable = this.menu.getActiveSelectable()) {
-                    this.select($selectable) && $e.preventDefault();
+                    this.select($selectable);
                 }
             },
             _onTabKeyed: function onTabKeyed(type, $e) {
