@@ -8,16 +8,17 @@ $ ->
     }
   });
 
-  $('#query').typeahead(
+  search = $('#query')
+
+  search.typeahead(
     highlight: true
   , {
     source: movies
-  });
+  }).bind 'typeahead:render', (e) ->
+      $('.tt-suggestion.tt-selectable:first').addClass('tt-cursor')
 
   $('.tt-menu').on 'click', ->
     $('#search_form').submit()
-
-  search = $('#query')
 
   search.on 'keydown', (event) ->
     e = jQuery.Event("keydown")
